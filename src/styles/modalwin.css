@@ -1,12 +1,12 @@
 /* Стили для модального окна */
 .modal {
-    position: fixed; /* Модальное окно фиксировано относительно окна браузера */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
-    display: flex; /* Выравнивание по центру */
+    background-color: rgba(0, 0, 0, 0.5); 
+    display: flex; 
     justify-content: center;
     align-items: center;
     z-index: 1000; /* Показать модальное окно поверх всех элементов */
@@ -17,7 +17,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 300px; /* Ширина модального окна */
-    max-height: 80%; /* Максимальная высота */
+    width: 300px; 
+    max-height: 80%;
     overflow-y: auto; /* Скролл для содержимого, если оно превышает высоту окна */
   }

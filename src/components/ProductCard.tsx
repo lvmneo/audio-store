@@ -18,7 +18,7 @@ interface ProductCardProps {
 }
 
 interface CartItemType extends Product {
-    quantity: number; // Добавлено свойство quantity
+    quantity: number; 
   }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite}) => {
@@ -41,7 +41,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite}) => {
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     }
 
-    // Обновляем количество товаров в иконке корзины
+    
     updateCartCount();
   };
 
@@ -58,12 +58,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite}) => {
 
   return (
     <div className="product-card">
-      <img src={product.image} alt={product.name} />
+      <img src={product.image} alt={product.name}  className="product-image"/>
       <h3>{product.name}</h3>
-      <p>{product.price} $</p>
-      <p>{product.rate}</p>
-      <button onClick={handleBuy}>Купить</button>
-      <button onClick={handleFavorite}>Добавить в избранное</button>
+      <p>{product.price} ₽</p>
+      <p>{product.rate}★</p>
+
+      <div className="product-actions">
+        <button className="buy-button" onClick={handleBuy}>Купить</button>
+        <button className="favorite-button" onClick={handleFavorite}>♡</button> {/* Кнопка для добавления в избранное */}
+      </div>
     </div>
   );
 };

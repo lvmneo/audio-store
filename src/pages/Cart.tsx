@@ -1,27 +1,33 @@
 import React, { useState,useEffect } from 'react';
 import CartItem from '../components/CartItem'
+import "../styles/card.css"
+import "../styles/cart-summary.css"
+
+import FavoritesModal from '../components/FavoritesModal';
 
 interface CartItemType {
     id: number;
     name: string;
     price: number;
     quantity: number;
+    image: string;
   }
-interface CartProps {
-  cartItems: CartItemType[]; // Пропсы для передачи данных о товарах в корзине
-}
+
 
 const Cart: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [cartCount, setCartCount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [favoritesCount, setFavoritesCount] = useState(0);
+  const [showFavoritesModal, setShowFavoritesModal] = useState(false); 
 
   useEffect(() => {
-    // Загружаем данные корзины из LocalStorage при монтировании компонента
+  
     const storedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     setCartItems(storedCartItems);
    
     updateCartSummary();
+    updateFavoritesCount();
   }, []);
 
   const handleRemove = (id: number) => {
@@ -71,9 +77,30 @@ const Cart: React.FC = () => {
     setTotalPrice(price);
   };
 
+  const updateFavoritesCount = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    setFavoritesCount(favorites.length);
+  };
+
+  const handleFavoritesClick = () => {
+    setShowFavoritesModal(true); 
+  };
+
+  const closeFavoritesModal = () => {
+    setShowFavoritesModal(false); 
+  };
+
   return (
     <div>
-      <h1>Корзина</h1>
+        <h1 className='tittle'>QPICK</h1>
+      <h2>Корзина</h2>
+      <div className ='header-cart'>
+      <button onClick={handleFavoritesClick}>
+          💖 {favoritesCount}
+        </button>
+        <a href="/">🛒 {cartCount}</a>
+     
+     </div>
       <div>
         {cartItems.length === 0 ? (
           <p>Корзина пуста</p>
@@ -81,6 +108,18 @@ const Cart: React.FC = () => {
           cartItems.map((item) => <CartItem key={item.id} item={item} onRemove={handleRemove}  onAdd={handleAdd} />)
         )}
       </div>
+
+       {/* Блок с итоговой суммой и кнопкой перехода к оформлению */}
+       <div className="cart-summary">
+          <div className="summary-total">
+            <p>ИТОГО</p>
+            <p>₽ {totalPrice}</p>
+          </div>
+          <button className="checkout-button">Перейти к оформлению</button>
+        </div>
+    
+
+      <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal} />
     </div>
   );
 };

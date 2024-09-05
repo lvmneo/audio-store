@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // Импорт компонента Link
+import { Link } from 'react-router-dom'; 
 import "../styles/modalwin.css"
-
-
+import FavoritesModal from '../components/FavoritesModal'; 
 import ProductCard from '../components/ProductCard';
 
 
@@ -79,15 +78,15 @@ const Catalog: React.FC = () => {
   };
 
   const handleFavoritesClick = () => {
-    setShowFavoritesModal(true); // Открыть модальное окно
+    setShowFavoritesModal(true); 
   };
 
   const closeFavoritesModal = () => {
-    setShowFavoritesModal(false); // Закрыть модальное окно
+    setShowFavoritesModal(false); 
   };
 
   useEffect(() => {
-    // Обновляем количество товаров при монтировании компонента
+    
     updateCartCount();
     updateFavoritesCount();
 
@@ -143,22 +142,7 @@ const Catalog: React.FC = () => {
 
     
     
-      {showFavoritesModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <h2>Избранное</h2>
-            {/* Список избранных товаров */}
-            {JSON.parse(localStorage.getItem('favorites') || '[]').map((item: Product) => (
-              <div key={item.id}>
-                <h3>{item.name}</h3>
-                <p>Цена: {item.price} ₽</p>
-              </div>
-            ))}
-            <button onClick={closeFavoritesModal}>Закрыть</button>
-          </div>
-        </div>
-      )}
-
+      <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal} />
 
     </div>
    
