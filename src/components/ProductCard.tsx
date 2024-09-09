@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useState} from 'react';
+import "../styles/card.css"
 
 interface Product {
   id: number;
@@ -17,32 +17,13 @@ interface ProductCardProps {
 
 }
 
-interface CartItemType extends Product {
-    quantity: number; 
-  }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite}) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) => {
+   
   const handleBuy = () => {
         // Получаем текущие товары из LocalStorage или инициализируем пустым массивом
-    const cartItems: CartItemType[] = JSON.parse(localStorage.getItem('cartItems') || '[]');
-
-    // Проверяем, есть ли товар уже в корзине
-    const existingItem = cartItems.find((item) => item.id === product.id);
-
-    if (existingItem) {
-      // Если товар уже есть в корзине, увеличиваем его количество
-      const updatedItems = cartItems.map((item) =>
-        item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-      );
-      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    } else {
-      // Если товара нет в корзине, добавляем его с количеством 1
-      const updatedItems = [...cartItems, { ...product, quantity: 1 }];
-      localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    }
-
-    
-    updateCartCount();
+        onBuy(product);
+  
   };
 
   const handleFavorite = () => {
@@ -50,22 +31,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite}) => {
   };
  
 
-  const updateCartCount = () => {
-    const cartItems: CartItemType[] = JSON.parse(localStorage.getItem('cartItems') || '[]');
-    const count = cartItems.reduce((total: number, item: CartItemType) => total + item.quantity, 0);
-    document.getElementById('cart-count')!.textContent = count.toString();
-  };
+ 
 
   return (
     <div className="product-card">
       <img src={product.image} alt={product.name}  className="product-image"/>
-      <h3>{product.name}</h3>
-      <p>{product.price} ₽</p>
-      <p>{product.rate}★</p>
+     
+      <p className='product.rate' >{product.rate}★</p>
 
+      <div className='name-card'>
+      <h3 className='product-name'>{product.name}</h3>
+      </div>
+      <p className='product-price'>{product.price} ₽</p>
+      
+  
       <div className="product-actions">
+        <button className="favorite-button" onClick={handleFavorite}>♡</button> 
         <button className="buy-button" onClick={handleBuy}>Купить</button>
-        <button className="favorite-button" onClick={handleFavorite}>♡</button> {/* Кнопка для добавления в избранное */}
       </div>
     </div>
   );
