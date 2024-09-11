@@ -15,6 +15,7 @@ interface Product {
     name: string;
     price: number;
     image: string;
+    sale:number ;
  
   }
 
@@ -28,21 +29,30 @@ const Catalog: React.FC = () => {
   
 
   const products = [
-    { id: 1, name: 'Apple BYZ S852I', price: 2927, rate:4.7, image: require ('../assets/Image.png'),category:'Наушники' },
-    { id: 2, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image1.png'),category:'Наушники' },
-    { id: 3, name: 'Apple BYZ S852I', price: 2927, rate:4.5,image:require('../assets/Image2.png'),category:'Наушники' },
-    { id: 4, name: 'Apple EarPods', price: 2327, rate:4.5,image:require ('../assets/Image.png'),category:'Наушники' },
-    { id: 5, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image1.png') ,category:'Наушники'},
-    { id: 6, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image2.png'),category:'Наушники' },
-    { id: 7, name: 'Apple AirPods', price: 9527, rate:4.7,image: require('../assets/Image3.png'),category:'Беспроводные Наушники'},
-    { id: 8, name: 'GERLAX GH-04', price: 6527, rate:4.7,image: require('../assets/Image4.png'),category:'Беспроводные Наушники'},
-    { id: 9, name: 'BOROFONE BO4', price: 7527, rate:4.7,image: require('../assets/Image5.png'),category:'Беспроводные Наушники'},
+    { id: 1, name: 'Apple BYZ S852I', price: 2927, rate:4.7,image: require ('../assets/Image.png'),category:'Наушники',sale:3927},
+    { id: 2, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image1.png'),category:'Наушники',sale:3927},
+    { id: 3, name: 'Apple BYZ S852I', price: 2927, rate:4.5,image:require('../assets/Image2.png'),category:'Наушники',sale:3927},
+    { id: 4, name: 'Apple EarPods', price: 2327, rate:4.5,image:require ('../assets/Image.png'),category:'Наушники',sale:0},
+    { id: 5, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image1.png') ,category:'Наушники',sale:0},
+    { id: 6, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image2.png'),category:'Наушники',sale:0},
+    { id: 7, name: 'Apple AirPods', price: 9527, rate:4.7,image: require('../assets/Image3.png'),category:'Беспроводные Наушники',sale:0},
+    { id: 8, name: 'GERLAX GH-04', price: 6527, rate:4.7,image: require('../assets/Image4.png'),category:'Беспроводные Наушники',sale:0},
+    { id: 9, name: 'BOROFONE BO4', price: 7527, rate:4.7,image: require('../assets/Image5.png'),category:'Беспроводные Наушники',sale:0},
  ];
-
+ useEffect(() => {
+  updateFavoritesCountModal();
+  updateCartCount();
+  updateFavoritesCount();
+  
+}, []);
 
  const wirelessheadphones = products.filter(product => product.category === 'Беспроводные Наушники');
   const headphones = products.filter(product => product.category === 'Наушники');
 
+  const  updateFavoritesCountModal = () => {
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    setFavoritesCount(favorites.length);
+  };
 
   const updateCartCount = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
@@ -65,6 +75,7 @@ const Catalog: React.FC = () => {
 
     updateCartCount();
   };
+  
 
   const addToFavorites = (product: Product) => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -90,12 +101,7 @@ const Catalog: React.FC = () => {
     setShowFavoritesModal(false); 
   };
 
-  useEffect(() => {
-    
-    updateCartCount();
-    updateFavoritesCount();
-    
-  }, []);
+
 
   return (
     <div className='page-content'>
@@ -115,14 +121,14 @@ const Catalog: React.FC = () => {
         </button>
       </div>
 
-      <h2>Наушники</h2>
+      <h2 className="product-list">Наушники</h2>
       <div className="product-list">
         {headphones.map((product) => (
           <ProductCard key={product.id} product={product} onBuy={addToCart} onFavorite={addToFavorites} />
         ))}
       </div>
 
-      <h3>Беспроводные Наушники</h3>
+      <h3 className="product-list">Беспроводные Наушники</h3>
       <div className = "product-list">
         {wirelessheadphones.map((product)=> 
         <ProductCard key={product.id} product={product} onBuy={addToCart}  onFavorite={addToFavorites} />)}
@@ -131,7 +137,7 @@ const Catalog: React.FC = () => {
 <footer><Footer /></footer>
     
 
- <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal} />
+ <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal}  updateFavoritesCountModal={ updateFavoritesCountModal}  />
 
     </div>
    

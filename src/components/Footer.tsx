@@ -1,5 +1,13 @@
 import React from 'react';
 import "../styles/footer.css";
+import FavoritesModal from '../components/FavoritesModal';
+
+
+interface FooterProps {
+    onOpenFavoritesModal: () => void;
+  }
+
+
 
 const Footer: React.FC = () => {
     return (
@@ -8,7 +16,7 @@ const Footer: React.FC = () => {
   <div className='Footer-content'>
     <h2 className='footer-tittle'>QPICK</h2>
     <div className="footer-links">
-      <a href="/fav">Избранное</a>
+      <a href="/FavoritesModal">Избранное</a>
       <a href="/cart">Корзина</a>
       <a href="/contact">Контакты</a>
     </div>

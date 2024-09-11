@@ -1,9 +1,9 @@
 body,html #root{
     background-color:#EAEAEA;
-
+   
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif; 
+    
 
 }
 
@@ -20,20 +20,23 @@ body,html #root{
 
 h1{
     margin-right: auto; 
-    
+    cursor: pointer;
+    margin-left:  55px;
 }
 
 h2{
     font-size: 20px;
     color: #838383;
-    
-    margin-right: 890px;
+    margin-right: 910px;
+    margin-bottom: -40px;
+   
 }
 
 h3{
     font-size: 20px;
     color: #838383;
-    
+    margin-bottom: -35px;
+    margin-top: -25px;
     margin-right: 760px;
 }
 
@@ -44,7 +47,7 @@ h3{
     justify-content: space-between; 
     padding: 10px 20px; 
     margin: 0;
-    
+
   }
 
   

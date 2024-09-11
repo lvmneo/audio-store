@@ -5,40 +5,42 @@ body,html #root{
   justify-content: space-between; 
   margin: 0;
   padding: 0;
+ 
   font-family: Arial, sans-serif; 
-
+ 
 }
 .cart-content {
   display: flex; 
   justify-content: space-between; 
   gap: 20px; 
-  
 }
 
 .cart-content-wr{
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-
+  flex-direction: column; /* Устанавливает карточки в столбец */
+  justify-content: flex-start; /* Начинаем выравнивание с начала контейнера */
+  align-items: flex-start; /* Выравниваем карточки по началу по горизонтали */
+  gap: 10px; /* Добавляет расстояние между карточками */
+  width: 100%; /* Используем всю ширину контейнера */
+  padding: 0; /* Убираем все внутренние отступы */
+  margin: 0; /* Убираем внешние отступы */
+  box-sizing: border-box;
 }
 .cart-main {
   display: flex;
-  
+ 
   flex-direction: column; 
-  justify-content: space-between; 
+  justify-content: flex-start;
   min-height: 100vh;
-  max-width: 1200px; 
+  padding: 20px;
   margin: auto;
   padding: 20px;
-
+  flex-grow: 1;
   margin: auto;
 }
-h1{
-    margin-right: auto; 
-    
-}
+
 .cart-conent-main{
-  
+
   padding: 300px;
  margin-top: -200px;
 }
@@ -95,7 +97,10 @@ h1{
     color: #302f2f;
   }
   
- 
+
+  .main-title{
+    margin-left:  -15px;
+  }
   .cart-tittle{
     margin-top: 120px;
     font-size: 20px;
@@ -111,7 +116,7 @@ h1{
   justify-content: space-between; 
   padding: 10px 20px; 
   margin: 0;
-  
+  margin-bottom: 50px;
 }
 
   .fav-head,
@@ -130,13 +135,14 @@ h1{
   .cart-actions {
     display: flex; 
     align-items: center;
-    gap: 15px; 
+    gap: 18px; 
     margin-top: 0px;
     border: none;
     margin-top: 10px; 
     justify-content: flex-start;
     margin-left: -320px;
-
+    font-weight:bolder;
+   
   }
 
   
@@ -144,12 +150,17 @@ h1{
     background-color: #FFCE7F;
     color: rgb(252, 248, 248);
     border: none;
-    padding: 4px 8px;
-    border-radius: 50%;
+    width: 30px; /* Устанавливаем ширину кнопки */
+    height: 30px; /* Устанавливаем высоту кнопки */
+    border-radius: 50%; /* Делаем кнопки круглыми */
+    display: flex; /* Включаем Flexbox для центрирования текста */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
     cursor: pointer;
-    font-size: 16px;
-    align-items: center;
+    font-size: 20px; /* Увеличиваем размер шрифта */
     transition: background-color 0.3s;
+    font-weight: bold;
+    margin: 0 5px; /* Отступы между кнопками */
   }
   
   .btn-button:hover {
@@ -170,4 +181,7 @@ h1{
     
     }
 
-    
+    footer {
+      margin-top: auto;
+      padding: 10px 0;
+    }
