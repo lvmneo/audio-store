@@ -1,7 +1,8 @@
 import React, { useState,useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; 
 import CartItem from '../components/CartItem'
 import Footer from '../components/Footer';
+import PaymentModal from '../components/PaymentModal';
 
 import "../styles/cart-summary.css"
 import "../styles/cart.css"
@@ -24,6 +25,7 @@ const Cart: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [favoritesCount, setFavoritesCount] = useState(0);
   const [showFavoritesModal, setShowFavoritesModal] = useState(false); 
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,6 +36,14 @@ const Cart: React.FC = () => {
     updateCartSummary();
     updateFavoritesCount();
   }, []);
+
+  const handleCheckout = () => {
+    setShowPaymentModal(true); 
+  };
+
+  const closePaymentModal = () => {
+    setShowPaymentModal(false); 
+  };
 
   const handleRemove = (id: number) => {
     const updatedItems = cartItems.map((item) => {
@@ -51,7 +61,7 @@ const Cart: React.FC = () => {
 
     // Сохраняем изменения в LocalStorage
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    updateCartSummary(); // Обновляем счетчик и общую стоимость после удаления
+    updateCartSummary(); 
   };
   const  updateFavoritesCountModal = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -59,16 +69,16 @@ const Cart: React.FC = () => {
   };
 
   const handleDelete = (id: number) => {
-    const updatedItems = cartItems.filter((item) => item.id !== id); // Удаление товара полностью
+    const updatedItems = cartItems.filter((item) => item.id !== id); 
     setCartItems(updatedItems);
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    updateCartSummary(); // Обновляем счетчик и общую стоимость после удаления
+    updateCartSummary(); 
   };
 
   const handleAdd = (id: number) => {
     const updatedItems = cartItems.map((item) => {
       if (item.id === id) {
-        // Увеличиваем количество товара на единицу
+       
         return { ...item, quantity: item.quantity + 1 };
       }
       return item;
@@ -78,17 +88,17 @@ const Cart: React.FC = () => {
 
     // Сохраняем изменения в LocalStorage
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    updateCartSummary(); // Обновляем счетчик и общую стоимость после добавления
+    updateCartSummary(); 
   };
 
   const updateCartSummary = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
-    // Обновляем количество товаров
+    
     const count = cartItems.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
     setCartCount(count);
 
-    // Обновляем общую стоимость товаров
+  
     const price = cartItems.reduce((total: number, item: { price: number; quantity: number }) => total + item.price * item.quantity, 0);
     setTotalPrice(price);
   };
@@ -115,6 +125,7 @@ const Cart: React.FC = () => {
     <div className='header-catalog-cart'>
         <h1 className='main-title' onClick={() => navigate('/')}>QPICK</h1>
        <h2 className='cart-tittle'>Корзина</h2>
+       <div className='actions-header'>
       <button className='fav-head' onClick={handleFavoritesClick}>
       <svg width="23" height="20" viewBox="0 0 23 20" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path d="M11.4867 1.65429C14.0706 -0.627558 18.0635 -0.551821 20.5528 1.90098C23.0409 4.35486 23.1267 8.2629 20.8124 10.812L11.4845 20L2.15892 10.812C-0.155442 8.2629 -0.0685429 4.34837 2.41851 1.90098C4.90996 -0.548575 8.89519 -0.630804 11.4867 1.65429ZM18.9952 3.42979C17.3452 1.80469 14.6833 1.73869 12.9563 3.26425L11.4878 4.56044L10.0183 3.26533C8.2858 1.73761 5.62935 1.80469 3.97498 3.43195C2.33601 5.04407 2.25351 7.62455 3.76379 9.32971L11.4856 16.937L19.2075 9.3308C20.7189 7.62455 20.6364 5.04732 18.9952 3.42979Z" fill="#838383"/>
@@ -126,7 +137,7 @@ const Cart: React.FC = () => {
         </svg>
           <span className="cart-count">{cartCount}</span>
         </button>
-       
+        </div>
         </div>
        
       <div className='cart-content-wr'>
@@ -144,10 +155,11 @@ const Cart: React.FC = () => {
             <p>ИТОГО</p>
             <p>₽ {totalPrice}</p>
           </div>
-          <button className="checkout-button">Перейти к оформлению</button>
+          <button className="checkout-button" onClick={handleCheckout}>Перейти к оформлению</button>
         </div>
         </div>
     </div>
+    <PaymentModal isOpen={showPaymentModal} onClose={closePaymentModal} cartItems={cartItems} totalPrice={totalPrice} />
       <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal}  updateFavoritesCountModal ={updateFavoritesCountModal} />
      
       <Footer />

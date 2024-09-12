@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link,useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; 
 import "../styles/modalwin.css"
 import "../styles/App.css"
 import FavoritesModal from '../components/FavoritesModal'; 
@@ -134,7 +134,7 @@ const Catalog: React.FC = () => {
         <ProductCard key={product.id} product={product} onBuy={addToCart}  onFavorite={addToFavorites} />)}
       </div>
 
-<footer><Footer /></footer>
+<Footer />
     
 
  <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal}  updateFavoritesCountModal={ updateFavoritesCountModal}  />

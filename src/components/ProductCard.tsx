@@ -21,7 +21,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) => {
    
   const handleBuy = () => {
-        // Получаем текущие товары из LocalStorage или инициализируем пустым массивом
+        
         onBuy(product);
   
   };
