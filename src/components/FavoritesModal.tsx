@@ -17,7 +17,7 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, update
 
   const [favorites, setFavorites] = useState<Product[]>([]);
 
-  // Загружаем избранные товары из локального хранилища при открытии модального окна
+  
   useEffect(() => {
     if (isOpen) {
       const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
@@ -25,7 +25,7 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, update
     }
   }, [isOpen]);
 
-  // Функция для удаления товара из избранного
+  
   const handleRemove = (id: number) => {
     const updatedFavorites = favorites.filter(item => item.id !== id);
     setFavorites(updatedFavorites);
@@ -52,10 +52,8 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, update
               <div className="favorite-item" key={item.id}>
                 <img src={item.image}  alt={item.name}  className="favorite-item-img"/>
                 <div className="favorite-item-info">
-                 
                   <h3 className="favorite-item-name">{item.name}</h3>
-                  <p className="favorite-item-price">Цена: {item.price} ₽</p>
-                  
+                  <p className="favorite-item-price">Цена: {item.price} ₽</p> 
                 </div>
                 <button className="remove-button"onClick={() => handleRemove(item.id)}>
                 <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -16,9 +16,6 @@ interface CartItemProps {
       onDelete: (id: number) => void;
     };
 
-
-  
-
   const CartItem: React.FC<CartItemProps> = ({ item,onRemove,onAdd,onDelete}) => {
     const handleRemove = () => {
         onRemove(item.id); 
@@ -39,6 +36,7 @@ interface CartItemProps {
                 <img src={item.image} alt={item.name} className="product-image-cart" />
                 
                     <h3 className="product-name-сart">{item.name}</h3>
+                    <p className='product-price-cart-under'>{item.price} ₽</p>
                     <div className="cart-actions">
                     <button className="delete-button" onClick={handleDelete}>
                     <svg width="21" height="17" viewBox="0 0 21 17" fill="none" xmlns="http://www.w3.org/2000/svg">

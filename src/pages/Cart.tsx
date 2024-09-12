@@ -59,7 +59,7 @@ const Cart: React.FC = () => {
 
     setCartItems(updatedItems);
 
-    // Сохраняем изменения в LocalStorage
+    
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     updateCartSummary(); 
   };
@@ -86,7 +86,7 @@ const Cart: React.FC = () => {
 
     setCartItems(updatedItems);
 
-    // Сохраняем изменения в LocalStorage
+    
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     updateCartSummary(); 
   };

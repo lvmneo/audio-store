@@ -59,10 +59,10 @@
 
   }
   .star-rate {
-   display: flex; /* Включаем Flexbox для выравнивания по горизонтали */
-    align-items: center; /* Центрирование по вертикали */
-    gap: 10px; /* Расстояние между звездой и рейтингом */
-     /* Отступ снизу */
+   display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: #838383;
   }
@@ -131,4 +131,35 @@
 
 .product-info{
   margin-top: -20px;
+}
+
+
+.details-button {
+  background-color: #FFCE7F;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.details-button:hover {
+  background-color: #ffae4a;
+}
+
+.product-details-info {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-details-info p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #555;
 }

@@ -11,6 +11,7 @@
     align-items: center;
     gap: 60px;
    
+   
 }
 
 .footer-tittle{
@@ -28,6 +29,7 @@
     flex-direction: column;
     gap: 10px; 
   margin-right: 40px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
    
 }
 
@@ -57,6 +59,7 @@
     align-items: center;
     padding: 30px;
     margin-top: -50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 
   .social-media a {

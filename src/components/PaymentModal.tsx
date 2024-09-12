@@ -20,7 +20,7 @@ interface PaymentModalProps {
 }
 
 const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, cartItems, totalPrice,onAdd, onRemove, onDelete }) => {
-  if (!isOpen) return null; // Не отображаем модальное окно, если оно не открыто
+  if (!isOpen) return null; 
 
   return (
     <div className="payment-modal">
@@ -37,7 +37,7 @@ const PaymentModal: React.FC<PaymentModalProps> = ({ isOpen, onClose, cartItems,
               <img src={item.image} alt={item.name} className="cart-item-image" />
               <div className="cart-item-info">
                 <h3 className="cart-item-name">{item.name}</h3>
-                <p className="cart-item-price">Цена: {item.price} ₽</p>
+                <p className="cart-item-price">{item.price} ₽</p>
                 <div className='actions-pay'>
                 <button className="btn-pl-min" onClick={() => onRemove(item.id)}>-</button>
                   <span>{item.quantity}</span>

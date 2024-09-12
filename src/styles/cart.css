@@ -6,7 +6,7 @@ body,html #root{
   margin: 0;
   padding: 0;
  
-  font-family: Arial, sans-serif; 
+  font-family: sans-serif;
  
 }
 .cart-content {
@@ -84,7 +84,12 @@ body,html #root{
     bottom: 16px; 
   right: 16px;
   }
-
+.product-price-cart-under{
+  color: #c0bdbd;
+  font-weight: lighter;
+  margin-right: 50px;
+  
+}
 
   .product-name-сart{
     font-size: 15px;

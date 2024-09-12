@@ -25,6 +25,7 @@ const Catalog: React.FC = () => {
     const [cartCount, setCartCount] = useState(0);
     const [favoritesCount, setFavoritesCount] = useState(0);
     const [showFavoritesModal, setShowFavoritesModal] = useState(false);
+    
     const navigate = useNavigate();
   
 

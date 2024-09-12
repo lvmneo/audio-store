@@ -19,7 +19,7 @@ interface ProductCardProps {
 
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) => {
-   
+  const [showDetails, setShowDetails] = useState(false);
   const handleBuy = () => {
         
         onBuy(product);
@@ -30,7 +30,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) =
     onFavorite(product);
   };
  
-
+  const toggleDetails = () => {
+    setShowDetails((prevShowDetails) => !prevShowDetails);
+  };
  
 
   return (
@@ -66,6 +68,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) =
     </div>
         <button className="buy-button" onClick={handleBuy}>Купить</button>
       </div>
+      
     </div>
   </div>
   );
