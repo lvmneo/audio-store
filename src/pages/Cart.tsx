@@ -159,7 +159,7 @@ const Cart: React.FC = () => {
         </div>
         </div>
     </div>
-    <PaymentModal isOpen={showPaymentModal} onClose={closePaymentModal} cartItems={cartItems} totalPrice={totalPrice} />
+    <PaymentModal isOpen={showPaymentModal} onClose={closePaymentModal} cartItems={cartItems} totalPrice={totalPrice}  onAdd={handleAdd}  onRemove={handleRemove}  onDelete={handleDelete}  />
       <FavoritesModal isOpen={showFavoritesModal} onClose={closeFavoritesModal}  updateFavoritesCountModal ={updateFavoritesCountModal} />
      
       <Footer />

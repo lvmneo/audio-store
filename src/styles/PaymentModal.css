@@ -63,7 +63,7 @@
     margin-bottom: 20px;
     border-radius: 8px;
     
-    background-color: hsl(0, 19%, 93%);
+    background-color: hsl(0, 33%, 94%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.13);
   transition: transform 0.2s;
   }
@@ -79,6 +79,7 @@
   }
   
   .cart-item-info {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
   }
@@ -87,7 +88,7 @@
   .cart-item-price,
   .cart-item-quantity {
     margin: 0;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 14px;
   }
   .cart-item-quantity {
@@ -134,7 +135,56 @@
   .pay-button:hover {
     background-color: #292c29;
   }
+
+
+  .actions-pay{
+    display: flex; 
+    align-items: center;
+    gap: 5px; 
+    border: none;
+    margin-top: 5px; 
+    justify-content: flex-start;
+   font-size: 12px;
+    font-weight:bolder;
+  }
+  .btn-pl-min{
+    background-color: #FFCE7F;
+    color: rgb(252, 248, 248);
+    border: none;
+    width: 20px; 
+    height: 20px; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+    margin: 0 5px;
+  }
+
+
+  .btn-pl-min:hover {
+    background-color: #cacadf;
+  }
+
+  .del-btn-pay{
+    border: none;
+   
+    margin-top: -75px;
+    margin-right: -2px;
+    padding: 6px 10px;
+   
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .del-btn-pay :hover {
   
+    transform: scale(1.05);
+  }
   @keyframes fadeIn {
     from { background-color: rgba(0, 0, 0, 0); }
     to { background-color: rgba(0, 0, 0, 0.5); }
