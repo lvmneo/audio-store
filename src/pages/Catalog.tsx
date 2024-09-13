@@ -19,16 +19,7 @@ interface Product {
  
   }
 
-
-const Catalog: React.FC = () => {
-    
-    const [cartCount, setCartCount] = useState(0);
-    const [favoritesCount, setFavoritesCount] = useState(0);
-    const [showFavoritesModal, setShowFavoritesModal] = useState(false);
-    
-    const navigate = useNavigate();
-  
-
+// Массив продуктов с характеристиками
   const products = [
     { id: 1, name: 'Apple BYZ S852I', price: 2927, rate:4.7,image: require ('../assets/Image.png'),category:'Наушники',sale:3927},
     { id: 2, name: 'Apple EarPods', price: 2327, rate:4.5,image: require('../assets/Image1.png'),category:'Наушники',sale:3927},
@@ -40,36 +31,48 @@ const Catalog: React.FC = () => {
     { id: 8, name: 'GERLAX GH-04', price: 6527, rate:4.7,image: require('../assets/Image4.png'),category:'Беспроводные Наушники',sale:0},
     { id: 9, name: 'BOROFONE BO4', price: 7527, rate:4.7,image: require('../assets/Image5.png'),category:'Беспроводные Наушники',sale:0},
  ];
+
+const Catalog: React.FC = () => {
+      // Состояния для количества товаров в корзине, избранного и для отображения модального окна избранного
+    const [cartCount, setCartCount] = useState(0);
+    const [favoritesCount, setFavoritesCount] = useState(0);
+    const [showFavoritesModal, setShowFavoritesModal] = useState(false);
+    const navigate = useNavigate();
+
  useEffect(() => {
   updateFavoritesCountModal();
   updateCartCount();
   updateFavoritesCount();
   
 }, []);
-
+  // Разделение продуктов на две категории: беспроводные наушники и обычные наушники
  const wirelessheadphones = products.filter(product => product.category === 'Беспроводные Наушники');
   const headphones = products.filter(product => product.category === 'Наушники');
 
+ // Функция обновления количества избранных товаров, хранящихся в localStorage
   const  updateFavoritesCountModal = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setFavoritesCount(favorites.length);
   };
 
+ // Функция для обновления количества товаров в корзине
   const updateCartCount = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
     const count = cartItems.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
     setCartCount(count);
   };
-  const addToCart = (product: Product) => {
-    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-    const existingItem = cartItems.find((item: { id: number }) => item.id === product.id);
 
-    if (existingItem) {
+    // Функция добавления товара в корзину
+  const addToCart = (product: Product) => {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');//извлекает текущий массив товаров в корзине из localStorage по ключу 'cartItems'
+    const existingItem = cartItems.find((item: { id: number }) => item.id === product.id);//проверяет, есть ли товар с таким id уже в корзине
+
+    if (existingItem) {//Если товар найден, обновляется его количество
       const updatedItems = cartItems.map((item: { id: number; quantity: number }) =>
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    } else {
+    } else {//если не найден,то создает новый массив со всеми товарами из корзины и добавляет новый товар
       const updatedItems = [...cartItems, { ...product, quantity: 1 }];
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     }
@@ -77,27 +80,32 @@ const Catalog: React.FC = () => {
     updateCartCount();
   };
   
-
+ // Функция добавления товара в избранное
   const addToFavorites = (product: Product) => {
-    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-    const existingItem = favorites.find((item: { id: number }) => item.id === product.id);
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');//извлекает текущий массив избранных товаров из localStorage
+    const existingItem = favorites.find((item: { id: number }) => item.id === product.id);//проверяет, есть ли товар с таким id уже в избранном
 
-    if (!existingItem) {
-      const updatedFavorites = [...favorites, product];
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      updateFavoritesCount();
+    if (!existingItem) {//Если товар не найден в массиве ,то тогда -->
+      const updatedFavorites = [...favorites, product];// Создает обновленный массив избранного
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));/*Сохраняет обновленный массив в localStorage.
+                                                                          Массив updatedFavorites преобразуется в строку формата JSON и сохраняется
+                                                                           в localStorage под ключом 'favorites'.*/ 
+      updateFavoritesCount();// Обновляет счетчик избранного
     }
   };
 
+  // Функция обновления счетчика избранных товаров
   const updateFavoritesCount = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setFavoritesCount(favorites.length);
   };
 
+  // Обработчик клика по кнопке "Избранное" для открытия модального окна
   const handleFavoritesClick = () => {
     setShowFavoritesModal(true); 
   };
 
+    // Функция для закрытия модального окна избранных товаров
   const closeFavoritesModal = () => {
     setShowFavoritesModal(false); 
   };

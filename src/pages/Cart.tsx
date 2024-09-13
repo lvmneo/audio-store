@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import CartItem from '../components/CartItem'
 import Footer from '../components/Footer';
 import PaymentModal from '../components/PaymentModal';
-
 import "../styles/cart-summary.css"
 import "../styles/cart.css"
 
 import FavoritesModal from '../components/FavoritesModal';
+
+
 
 interface CartItemType {
     id: number;
@@ -20,39 +21,44 @@ interface CartItemType {
 
 
 const Cart: React.FC = () => {
-  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
-  const [favoritesCount, setFavoritesCount] = useState(0);
-  const [showFavoritesModal, setShowFavoritesModal] = useState(false); 
-  const [showPaymentModal, setShowPaymentModal] = useState(false);
-  const navigate = useNavigate();
 
-  useEffect(() => {
+
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);// Список товаров в корзине
+  const [cartCount, setCartCount] = useState(0);// Количество товаров в корзине
+  const [totalPrice, setTotalPrice] = useState(0); // Общая стоимость товаров в корзине
+  const [favoritesCount, setFavoritesCount] = useState(0);// Количество избранных товаров
+  const [showFavoritesModal, setShowFavoritesModal] = useState(false); // Отображение модального окна избранных товаров
+  const [showPaymentModal, setShowPaymentModal] = useState(false);// Отображение модального окна для оплаты
+  const navigate = useNavigate();// Хук для навигации между страницами
+
   
+  useEffect(() => {
+  // получение данные о товарах в корзине из localStorage
     const storedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-    setCartItems(storedCartItems);
-    updateFavoritesCountModal();
-    updateCartSummary();
-    updateFavoritesCount();
+    setCartItems(storedCartItems);// товары в корзине
+    updateFavoritesCountModal();// Обновление количества избранных товаров
+    updateCartSummary(); // Обновление общего количества и стоимость товаров в корзине
+    updateFavoritesCount();// Обновление счетчика избранных товаров
   }, []);
 
+   // Функция для открытия модального окна для оформления заказа
   const handleCheckout = () => {
     setShowPaymentModal(true); 
   };
-
+  // Функция для закрытия модального окна оплаты
   const closePaymentModal = () => {
     setShowPaymentModal(false); 
   };
 
+  // Функция для удаления одного экземпляра товара из корзины
   const handleRemove = (id: number) => {
     const updatedItems = cartItems.map((item) => {
       if (item.id === id) {
-        const updatedQuantity = item.quantity - 1;
-        if (updatedQuantity > 0) {
+        const updatedQuantity = item.quantity - 1;// Уменьшаем количество на единицу
+        if (updatedQuantity > 0) {// Возвращаем товар с обновленным количеством, если количество больше 0
           return { ...item, quantity: updatedQuantity };
         }
-        return null;
+        return null;// Возвращаем null, если количество 0 или меньше
       }
       return item;
     }).filter((item) => item !== null) as CartItemType[];
@@ -63,18 +69,22 @@ const Cart: React.FC = () => {
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     updateCartSummary(); 
   };
+
+  // Функция для обновления количества избранных товаров в модальном окне
   const  updateFavoritesCountModal = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setFavoritesCount(favorites.length);
   };
 
-  const handleDelete = (id: number) => {
+    // Функция для удаления товара из корзины
+    const handleDelete = (id: number) => {
     const updatedItems = cartItems.filter((item) => item.id !== id); 
     setCartItems(updatedItems);
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     updateCartSummary(); 
   };
 
+   // Функция для добавления одного экземпляра товара в корзину
   const handleAdd = (id: number) => {
     const updatedItems = cartItems.map((item) => {
       if (item.id === id) {
@@ -91,6 +101,7 @@ const Cart: React.FC = () => {
     updateCartSummary(); 
   };
 
+  // Функция для обновления сводки корзины (общее количество и сумма)
   const updateCartSummary = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
@@ -103,15 +114,18 @@ const Cart: React.FC = () => {
     setTotalPrice(price);
   };
 
+  // Функция для обновления количества избранных товаров
   const updateFavoritesCount = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setFavoritesCount(favorites.length);
   };
 
+  //Функция для открытия модальног окна избранных товаров 
   const handleFavoritesClick = () => {
     setShowFavoritesModal(true); 
   };
 
+  //Функция для закрытия модальног окна избранных товаров 
   const closeFavoritesModal = () => {
     setShowFavoritesModal(false); 
   };
@@ -120,8 +134,6 @@ const Cart: React.FC = () => {
 
   return (
     <div className='cart-main'>
-    
-       
     <div className='header-catalog-cart'>
         <h1 className='main-title' onClick={() => navigate('/')}>QPICK</h1>
        <h2 className='cart-tittle'>Корзина</h2>

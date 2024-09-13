@@ -1,5 +1,8 @@
+/* отображения карточки продукта в списке продуктов*/
+
 import React, { useState} from 'react';
 import "../styles/card.css"
+import ProductDetailsModal from './ProductDetailsModal';
 
 interface Product {
   id: number;
@@ -16,6 +19,27 @@ interface ProductCardProps {
    onFavorite: (product: Product) => void;
 
 }
+
+
+interface ProductDetails {
+  description: string;
+  features: string[];
+  brand: string;
+  type: string;
+  wt:number;
+}
+
+const productDetails: Record<number, ProductDetails> = {
+  1: { description: 'Apple BYZ S852I', brand: 'BYZ', type: 'Наушники',wt:4, features: ['Микрофон', 'Проводное соединение', '3.5mm разъем'] },
+  2: { description: 'Apple EarPods', brand: 'Apple', type: 'Наушники',wt:4, features: ['Плоский провод', 'Встроенный микрофон', 'Легкий вес'] },
+  3: { description: 'Apple BYZ S852I', brand: 'BYZ', type: 'Наушники',wt:5,  features: ['Регулируемая посадка','Встроенный микрофон', 'Поддержка профилей работы: AVRCP,HFP (Hands-free),A2DP,Headset'] },
+  4: { description: 'Apple EarPods', brand: 'Apple', type: 'Наушники',wt:4,  features: ['Микрофон', 'Проводное соединение', 'Легкий вес','автоматическая подстройка громкости'] },
+  5: { description: 'Apple EarPods', brand: 'Apple', type: 'Наушники',wt:4,  features: ['Классический дизайн', 'Плоский провод','автоматическая подстройка громкости'] },
+  6: { description: 'Apple EarPods', brand: 'Apple', type: 'Наушники',wt:5,  features: ['Комфортное использование', 'Высокая чистота звука','автоматическая подстройка громкости'] },
+  7: { description: 'Apple AirPods', brand: 'Apple', type: 'Беспроводные наушники',wt:4,  features: ['Беспроводное соединение', 'Зарядный кейс', 'Сенсорное управление','функция «Совместный доступ к аудио»'] },
+  8: { description: 'GERLAX GH-04', brand: 'GERLAX', type: 'Беспроводные наушники',wt:5,  features: ['Беспроводное соединение', 'Длительное время работы', 'Компактный размер','L-образный разъем, влагозащита'] },
+  9: { description: 'BOROFONE BO4', brand: 'BOROFONE', type: 'Беспроводные наушники', wt:10, features: ['Беспроводное соединение', 'Легкий вес', 'Превосходное качество звука','Поддержка профилей работы: AVRCP,HFP (Hands-free),A2DP,Headset'] }
+};
 
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) => {
@@ -36,6 +60,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) =
  
 
   return (
+    <>
     <div className="product-card">
       <div className='btn-fav'>
       <button className="favorite-button" onClick={handleFavorite}>♡</button> 
@@ -68,10 +93,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) =
     </div>
         <button className="buy-button" onClick={handleBuy}>Купить</button>
       </div>
-      
+      <button className="details-button" onClick={toggleDetails}>Подробнее</button>
     </div>
+ 
   </div>
-  );
+  <ProductDetailsModal
+        isOpen={showDetails}
+        onClose={toggleDetails}
+        productDetails={productDetails[product.id]}
+      />
+ </>
+);
 };
 
 export default ProductCard;

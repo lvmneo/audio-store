@@ -1,11 +1,13 @@
 import React, { useState,useEffect } from 'react';
 
+
 interface Product {
   id: number;
   name: string;
   price: number;
   image: string;
 }
+
 
 interface FavoritesModalProps {
   isOpen: boolean; 
@@ -17,15 +19,15 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, update
 
   const [favorites, setFavorites] = useState<Product[]>([]);
 
-  
+  // Используем хук useEffect для выполнения побочных эффектов при изменении значения isOpen
   useEffect(() => {
-    if (isOpen) {
+    if (isOpen) {// Если модальное окно открыто, загружаем избранные товары из localStorage
       const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       setFavorites(storedFavorites);
     }
-  }, [isOpen]);
+  }, [isOpen]); // Эффект срабатывает при изменении значения isOpen
 
-  
+  //функция удаления товара из списка избранных
   const handleRemove = (id: number) => {
     const updatedFavorites = favorites.filter(item => item.id !== id);
     setFavorites(updatedFavorites);
