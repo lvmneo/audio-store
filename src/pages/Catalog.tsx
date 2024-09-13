@@ -52,23 +52,27 @@ const Catalog: React.FC = () => {
  // Функция обновления количества избранных товаров, хранящихся в localStorage
   const  updateFavoritesCountModal = () => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+   
     setFavoritesCount(favorites.length);
-  };
+  }; 
+ 
 
  // Функция для обновления количества товаров в корзине
   const updateCartCount = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+   
     const count = cartItems.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
     setCartCount(count);
   };
-
+  
     // Функция добавления товара в корзину
   const addToCart = (product: Product) => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');//извлекает текущий массив товаров в корзине из localStorage по ключу 'cartItems'
     const existingItem = cartItems.find((item: { id: number }) => item.id === product.id);//проверяет, есть ли товар с таким id уже в корзине
-
+   
     if (existingItem) {//Если товар найден, обновляется его количество
       const updatedItems = cartItems.map((item: { id: number; quantity: number }) =>
+        
         item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
       );
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
@@ -79,7 +83,7 @@ const Catalog: React.FC = () => {
 
     updateCartCount();
   };
-  
+ 
  // Функция добавления товара в избранное
   const addToFavorites = (product: Product) => {
     const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');//извлекает текущий массив избранных товаров из localStorage

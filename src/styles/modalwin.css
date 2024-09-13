@@ -14,10 +14,10 @@
 }
 
 .modal-content {
-  background-color: white;
+
   padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
   width: 400px; 
   max-height: 80%;
   overflow-y: auto; 
@@ -67,6 +67,7 @@
 
 .modal-body {
   margin-bottom: 20px;
+  
 }
 
 .favorite-item {
@@ -75,7 +76,7 @@
   margin-bottom: 20px;
   border-radius: 8px;
   
-  background-color: hsl(0, 19%, 93%);
+  background-color: hsl(0, 25%, 94%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.13);
 transition: transform 0.2s;
  
@@ -117,7 +118,7 @@ transition: transform 0.2s;
 
 .remove-button {
   margin-top: -75px;
-    margin-right: -2px;
+    margin-right: -5px;
   border: none;
   color: white;
   font-size: 12px;
