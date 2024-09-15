@@ -35,7 +35,9 @@ const Cart: React.FC = () => {
   useEffect(() => {
   // получение данные о товарах в корзине из localStorage
     const storedCartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     setCartItems(storedCartItems);// товары в корзине
+     setFavoritesCount(storedFavorites.length);
     updateFavoritesCountModal();// Обновление количества избранных товаров
     updateCartSummary(); // Обновление общего количества и стоимость товаров в корзине
     updateFavoritesCount();// Обновление счетчика избранных товаров

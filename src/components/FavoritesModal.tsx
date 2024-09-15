@@ -19,7 +19,7 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, update
 
   const [favorites, setFavorites] = useState<Product[]>([]);
 
-  // Используем хук useEffect для выполнения побочных эффектов при изменении значения isOpen
+  
   useEffect(() => {
     if (isOpen) {// Если модальное окно открыто, загружаем избранные товары из localStorage
       const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
