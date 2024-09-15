@@ -1,11 +1,8 @@
 import React from 'react';
 import "../styles/footer.css";
-import FavoritesModal from '../components/FavoritesModal';
 
 
-interface FooterProps {
-    onOpenFavoritesModal: () => void;
-  }
+
 
 
 
