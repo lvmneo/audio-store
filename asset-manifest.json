@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/lvmneo.github.io/audio-store/static/css/main.5e8dc05b.css",
-    "main.js": "/lvmneo.github.io/audio-store/static/js/main.a6373215.js",
+    "main.js": "/lvmneo.github.io/audio-store/static/js/main.4f5c74be.js",
     "static/js/453.06b0ae66.chunk.js": "/lvmneo.github.io/audio-store/static/js/453.06b0ae66.chunk.js",
     "static/media/Image2.png": "/lvmneo.github.io/audio-store/static/media/Image2.f7e990ebb815760db8d9.png",
     "static/media/Image5.png": "/lvmneo.github.io/audio-store/static/media/Image5.34020b6c6d802a95d32b.png",
@@ -11,11 +11,11 @@
     "static/media/Image1.png": "/lvmneo.github.io/audio-store/static/media/Image1.2c0fa36c04e8f570ef9b.png",
     "index.html": "/lvmneo.github.io/audio-store/index.html",
     "main.5e8dc05b.css.map": "/lvmneo.github.io/audio-store/static/css/main.5e8dc05b.css.map",
-    "main.a6373215.js.map": "/lvmneo.github.io/audio-store/static/js/main.a6373215.js.map",
+    "main.4f5c74be.js.map": "/lvmneo.github.io/audio-store/static/js/main.4f5c74be.js.map",
     "453.06b0ae66.chunk.js.map": "/lvmneo.github.io/audio-store/static/js/453.06b0ae66.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5e8dc05b.css",
-    "static/js/main.a6373215.js"
+    "static/js/main.4f5c74be.js"
   ]
 }
