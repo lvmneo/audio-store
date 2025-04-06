@@ -1,6 +1,6 @@
 /* отображения карточки продукта в списке продуктов*/
 
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import "../styles/card.css"
 import ProductDetailsModal from './ProductDetailsModal';
 
@@ -44,6 +44,15 @@ const productDetails: Record<number, ProductDetails> = {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    // Проверяем, находится ли товар в избранном при загрузке компонента
+    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+    const productIsFavorite = favorites.some((item: { id: number }) => item.id === product.id);
+    setIsFavorite(productIsFavorite);
+  }, [product.id]);
+
   const handleBuy = () => {
         
         onBuy(product);
