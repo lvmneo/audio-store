@@ -18,10 +18,10 @@ body,html #root{
 }
 
 
-h1{
+.main{
     margin-right: auto; 
- 
-    margin-left:  55px;
+    
+    margin-left: 50px;
 }
 
 h2{
