@@ -32,7 +32,7 @@ interface Product {
  ];
 
 const Catalog: React.FC = () => {
-      // Состояния для количества товаров в корзине, избранного и для отображения модального окна избранного
+      // Состояния для количества товаров в корзине, избранного 
     const [cartCount, setCartCount] = useState(0);
     const [favoritesTrigger, setFavoritesTrigger] = useState(false);
     const navigate = useNavigate();
@@ -86,7 +86,8 @@ const Catalog: React.FC = () => {
       const updatedItems = findItem 
         ? cartItems.map(item =>
             item.id === product.id 
-            ? { ...item, quantity: item.quantity + 1 } : item)
+            ? { ...item, quantity: item.quantity + 1 } 
+            : item)
             : [...cartItems, { ...product, quantity: 1 }];
   
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
@@ -115,14 +116,22 @@ const Catalog: React.FC = () => {
       <h2 className="product-list">Наушники</h2>
       <div className="product-list">
         {headphones.map(product=> (
-          <ProductCard key={product.id} product={product} onBuy={addToCart} onFavorite={addToFavorites} />
+          <ProductCard 
+          key={product.id} 
+          product={product} 
+          onBuy={addToCart} 
+          onFavorite={addToFavorites} />
         ))}
       </div>
 
       <h3 className="product-list">Беспроводные Наушники</h3>
       <div className = "product-list">
         {wirelessheadphones.map((product)=> 
-        <ProductCard key={product.id} product={product} onBuy={addToCart}  onFavorite={addToFavorites} />)}
+        <ProductCard 
+        key={product.id} 
+        product={product} 
+        onBuy={addToCart}  
+        onFavorite={addToFavorites} />)}
       </div>
 
 <Footer />

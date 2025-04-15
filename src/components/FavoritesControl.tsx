@@ -20,7 +20,7 @@ const FavoritesControl: React.FC<Props> = ({ triggerUpdate }) => {
 
   useEffect(() => {
     updateFavoritesCountModal();
-  }, [triggerUpdate]);
+  }, [triggerUpdate]);//cрабатывает каждый раз, когда меняется значение пропса
 
   const handleFavoritesClick = () => setShowFavoritesModal(true);
   const closeFavoritesModal = () => setShowFavoritesModal(false);
