@@ -57,7 +57,7 @@ const Catalog: React.FC = () => {
     if (!alreadyInFavs) {
       const updatedFavorites = [...favorites, product];
       localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-      setFavoritesTrigger(prev => !prev); 
+      setFavoritesTrigger(prev => !prev); //запускает useEffect, в котором обновляется счётчик
     }
   };
 
@@ -68,20 +68,26 @@ const Catalog: React.FC = () => {
   const updateCartCount = () => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
    
-    const count = cartItems.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
+    const count = cartItems.reduce((acc: number, item: { quantity: number }) => acc + item.quantity, 0);
     setCartCount(count);
   };
   
     // Функция добавления товара в корзину
     const addToCart = (product: Product) => {
-      const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
-      const existingItem = cartItems.find((item: { id: number }) => item.id === product.id);
+      const cartItems: {
+        id: number;
+        name: string;
+        price: number;
+        quantity: number;
+        image: string;
+      }[]=JSON.parse(localStorage.getItem('cartItems') || '[]');
+      const findItem = cartItems.find(item => item.id === product.id);
   
-      const updatedItems = existingItem
-        ? cartItems.map((item: any) =>
-            item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
-          )
-        : [...cartItems, { ...product, quantity: 1 }];
+      const updatedItems = findItem 
+        ? cartItems.map(item =>
+            item.id === product.id 
+            ? { ...item, quantity: item.quantity + 1 } : item)
+            : [...cartItems, { ...product, quantity: 1 }];
   
       localStorage.setItem('cartItems', JSON.stringify(updatedItems));
       updateCartCount();

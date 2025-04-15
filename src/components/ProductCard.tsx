@@ -46,15 +46,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite,onBuy}) =
   
   const [showDetails, setShowDetails] = useState(false);
 
-  const handleBuy = () => {
-        
-        onBuy(product);
-  
-  };
+  const handleBuy = () => onBuy(product);
 
-  const handleFavorite = () => {
-    onFavorite(product);
-  };
+  const handleFavorite = () => onFavorite(product);
  
   const toggleDetails = () => {
     setShowDetails((prevShowDetails) => !prevShowDetails);

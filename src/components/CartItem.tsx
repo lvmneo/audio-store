@@ -19,19 +19,15 @@ interface CartItemProps {
   const CartItem: React.FC<CartItemProps> = ({ item,onRemove,onAdd,onDelete}) => {
 
     // Функция для удаления одного экземпляра товара (уменьшения количества на единицу)
-    const handleRemove = () => {
-        onRemove(item.id); 
-    };
+    const handleRemove = () => onRemove(item.id);
 
      // Функция для добавления одного экземпляра товара (увеличения количества на единицу)
-    const handleAdd = () => {
-        onAdd(item.id); 
-      };
+    const handleAdd = () => onAdd(item.id); 
+      
 
         // Функция для полного удаления товара из корзины
-      const handleDelete = () => {
-        onDelete(item.id); 
-      };
+      const handleDelete = () => onDelete(item.id); 
+      
   
 
       return (

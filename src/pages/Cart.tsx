@@ -56,7 +56,6 @@ const Cart: React.FC = () => {
 
     setCartItems(updatedItems);
 
-    
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
     updateCartSummary(); 
   };
@@ -103,11 +102,11 @@ const handleAdd = (id: number) => {
     const cartItems = JSON.parse(localStorage.getItem('cartItems') || '[]');
 
     
-    const count = cartItems.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
+    const count = cartItems.reduce((acc: number, item: { quantity: number }) => acc + item.quantity, 0);
     setCartCount(count);
 
   
-    const price = cartItems.reduce((total: number, item: { price: number; quantity: number }) => total + item.price * item.quantity, 0);
+    const price = cartItems.reduce((acc: number, item: { price: number; quantity: number }) => acc + item.price * item.quantity, 0);
     setTotalPrice(price);
   };
 
