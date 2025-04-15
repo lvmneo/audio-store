@@ -1,3 +1,5 @@
+//модальноо окно избранных товаров
+
 import React, { useState,useEffect } from 'react';
 
 
@@ -12,10 +14,10 @@ interface Product {
 interface FavoritesModalProps {
   isOpen: boolean; 
   onClose: () => void; 
-  updateFavoritesCountModal: () => void;
+  onUpdateFavorites: () => void;
 }
 
-const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, updateFavoritesCountModal }) => {
+const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, onUpdateFavorites }) => {
 
   const [favorites, setFavorites] = useState<Product[]>([]);
 
@@ -32,7 +34,7 @@ const FavoritesModal: React.FC<FavoritesModalProps> = ({ isOpen, onClose, update
     const updatedFavorites = favorites.filter(item => item.id !== id);
     setFavorites(updatedFavorites);
     localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-    updateFavoritesCountModal();
+    onUpdateFavorites();
   };
 
   if (!isOpen) return null;
